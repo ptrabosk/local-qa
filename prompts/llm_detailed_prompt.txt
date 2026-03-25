@@ -1,4 +1,4 @@
-You are grading ONLY these categories for the audited agent message:
+﻿You are grading ONLY these categories for the audited agent message:
 - understandable
 - preferred_tone_followed
 - empathy
@@ -9,12 +9,13 @@ Return ONLY valid JSON matching exactly:
 
 Rules:
 - Every score must be 0 or 1.
-- finding should summarize the most important issues (or why it passes).
+- Each justification must be one concise sentence explaining that category result.
+- Each flagged_words_or_phrases array should contain exact words/phrases from the audited agent message that drove the category score; if none, return [].
 - Use tone_rules.json only for preferred_tone_followed.
 - Use empathy_rules.json only for empathy, based on the prior customer message context.
 - Use personalization_rules.json only for personalization, based only on personalization_customer_messages (the last contiguous customer inbound message(s) before the audited agent message).
 - For personalization, do not use full conversation context; ignore system messages and anything outside personalization_customer_messages.
-- Consider blocklisted_words: if the audited agent message contains any, set ALL four scores to 0 and mention it in finding.
+- Consider blocklisted_words: if the audited agent message contains any, set ALL category scores to 0 and include the matched blocklisted terms in each flagged_words_or_phrases array.
 - Do not grade grammar/typos/repetition; those are handled locally.
 
 Inputs (JSON):

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Dict
+from typing import Any, Dict, List
 import json
 import re
 import yaml
@@ -7,7 +7,13 @@ from functools import lru_cache
 from sentence_transformers import SentenceTransformer
 
 from .schema import AuditInput, AuditOutput, LocalFindings, LLMFindings
-from .conversation import strip_system, get_audited_agent_message, prior_agent_messages, last_customer_message
+from .conversation import (
+    strip_system,
+    get_audited_agent_message,
+    prior_agent_messages,
+    last_customer_message,
+    trailing_customer_messages_before_audited,
+)
 from .grammar_typos import count_grammar_and_typos
 from .repetition_st import repetition_check
 from .llm_ollama import OllamaClient
@@ -54,6 +60,10 @@ def _contains_exact_phrase(text: str, phrase: str) -> bool:
     pattern = re.escape(p).replace(r"\ ", r"\s+")
     return re.search(rf"(?<!\w){pattern}(?!\w)", text, flags=re.IGNORECASE) is not None
 
+
+def _find_phrase_hits(text: str, phrases: List[str]) -> List[str]:
+    return [phrase for phrase in phrases if isinstance(phrase, str) and _contains_exact_phrase(text, phrase)]
+
 def run_audit(
     audit_in: AuditInput,
     config_path: str = "config/config.yaml",
@@ -97,9 +107,16 @@ def run_audit(
 
     # Blocklist hits (deterministic)
     blocklist_hits = [w for w in audit_in.blocklisted_words if _contains_exact_phrase(audited_msg, w)]
+    non_apology_patterns = empathy_rules.get("non_apology_patterns", [])
+    non_apology_hits = _find_phrase_hits(audited_msg, non_apology_patterns)
 
     # LLM-only payload
-    last_customer = last_customer_message(conv_ns[:])  # last customer anywhere in convo (incl audited turn)
+    personalization_customer_messages = trailing_customer_messages_before_audited(prior)
+    last_customer = (
+        personalization_customer_messages[-1]
+        if personalization_customer_messages
+        else last_customer_message(prior)
+    )
 
     llm_payload = {
         "id": audit_in.id,
@@ -109,8 +126,10 @@ def run_audit(
         "conversation": [{"role": m.role, "text": m.text} for m in conv_ns],
         "audited_agent_message": audited_msg,
         "prior_customer_message": last_customer,
+        "personalization_customer_messages": personalization_customer_messages,
         "tone_rules.json": tone_rules,
         "empathy_rules.json": empathy_rules,
+        "non_apology_hits": non_apology_hits,
         "personalization_rules.json": personalization_rules,
         # optional local context (do not grade these)
         "local_signals": {
@@ -133,12 +152,23 @@ def run_audit(
     prompt = build_llm_only_prompt(llm_payload)
     llm_raw = client.generate_json(prompt)
 
+    empathy_score = _require_int01(llm_raw, "empathy")
+    finding = _require_one_sentence(llm_raw.get("finding"))
+    if non_apology_hits:
+        empathy_score = 0
+        llm_raw["empathy"] = 0
+        llm_raw["empathy_non_apology_hits"] = non_apology_hits
+        finding = (
+            f"Empathy marked down due to non-apology pattern(s): {', '.join(non_apology_hits)}."
+        )
+        llm_raw["finding"] = finding
+
     llm = LLMFindings(
         understandable=_require_int01(llm_raw, "understandable"),
         preferred_tone_followed=_require_int01(llm_raw, "preferred_tone_followed"),
-        empathy=_require_int01(llm_raw, "empathy"),
+        empathy=empathy_score,
         personalization=_require_int01(llm_raw, "personalization"),
-        finding=_require_one_sentence(llm_raw.get("finding")),
+        finding=finding,
     )
 
     return AuditOutput(

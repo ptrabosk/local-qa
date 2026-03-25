@@ -2,17 +2,26 @@
   "when_required": [
     "Customer expresses frustration, disappointment, anger, or distress",
     "Customer reports a problem (broken, not working, charged incorrectly, delay)",
-    "Customer requests refund/cancellation due to negative experience",
+    "Customer requests a refund, cancellation, or compensation due to a negative experience",
+    "Customer shares effort or cooperation (providing order details, screenshots, additional information)",
     "Customer is excited or emotional about a positive experience and wants to share it"
   ],
   "required_components": [
     "Acknowledge the customer\u2019s situation/emotion",
-    "If appropriate, brief apology",
-    "Clear next step or ownership statement"
+    "Genuine, direct apology when the experience is negative (no conditional phrasing)",
+    "Gratitude if the customer provided useful information",
+    "Clear next step, resolution path, or ownership statement"
   ],
   "not_allowed": [
     "Blaming the customer",
     "Dismissive language",
-    "Arguing about feelings"
+    "Arguing with or invalidating customer feelings",
+    "Conversation-ending phrases during active troubleshooting (e.g., 'Hope this helps')"
+  ],
+  "non_apology_patterns": [
+    "I'm sorry you feel that way",
+    "Sorry if that caused you any trouble",
+    "My apologies if this caused trouble",
+    "Sorry if you were offended"
   ]
 }

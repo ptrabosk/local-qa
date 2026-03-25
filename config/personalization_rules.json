@@ -1,10 +1,12 @@
 {
   "required": [
-    "Address the customer\u2019s specific request or issue from prior messages",
-    "Avoid irrelevant content not supported by the conversation"
+    "Customize all parts of the message so they are directly relevant to the customer's specific request, issue, and prior context",
+    "Remove any unnecessary information that does not help address the customer's topic",
+    "Keep the message text-friendly by making it clear, concise, and easy to read without overwhelming the customer"
   ],
   "not_allowed": [
-    "Generic filler not tied to the case",
-    "Asking for info already provided (unless you explain why you still need it)"
+    "Personalized details that are irrelevant, forced, or not supported by the conversation",
+    "Generic filler, repetition, side topics, or excessive explanation not tied to the case",
+    "Dense, cluttered, overly long, or hard-to-scan writing"
   ]
 }

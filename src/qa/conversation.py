@@ -26,3 +26,15 @@ def last_customer_message(messages: List[Message]) -> str:
         if m.role == "customer":
             return m.text
     return ""
+
+
+def trailing_customer_messages_before_audited(prior_messages: List[Message]) -> List[str]:
+    trailing: List[str] = []
+    for m in reversed(prior_messages):
+        if m.role == "customer":
+            trailing.append(m.text)
+            continue
+        if trailing:
+            break
+    trailing.reverse()
+    return trailing

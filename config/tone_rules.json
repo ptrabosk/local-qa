@@ -2,60 +2,106 @@
   "polished": {
     "description": "Clear, confident, concise. Friendly but not overly so. Contractions OK. No slang.",
     "do": [
-      "Use concise sentences",
-      "Be direct and helpful"
+      "Use concise, well-structured sentences",
+      "Be direct and solution-oriented",
+      "Maintain a confident and neutral-friendly tone",
+      "Use everyday, clear vocabulary",
+      "Keep responses focused and relevant",
+      "Use idiomatic expressions sparingly and naturally",
+      "Ensure smooth sentence flow and readability"
     ],
     "dont": [
-      "Use slang",
-      "Be overly formal"
+      "Use slang or trendy internet language",
+      "Be overly formal or robotic",
+      "Use corporate, legal, or policy-heavy phrasing",
+      "Over-explain simple points",
+      "Use unnecessary filler words",
+      "Sound overly enthusiastic or exaggerated",
+      "Use emojis or informal punctuation"
     ]
   },
   "casual": {
     "description": "Friendly and conversational. Contractions OK. Still professional.",
     "do": [
-      "Sound approachable",
-      "Use natural contractions when appropriate"
+      "Follow polished tone as a baseline",
+      "Sound approachable and human",
+      "Use natural contractions (e.g., it's, you're)",
+      "Use light conversational phrasing",
+      "Keep a smooth and relaxed flow",
+      "Show mild warmth or friendliness where appropriate",
+      "Simplify complex ideas without losing clarity"
     ],
     "dont": [
-      "Be sloppy",
-      "Be sarcastic",
-      "Overuse filler phrases"
+      "Be sloppy or unstructured",
+      "Use sarcasm or passive-aggressive tone",
+      "Overuse filler phrases (e.g., 'just', 'like')",
+      "Be overly casual or informal",
+      "Use slang or memes",
+      "Lose clarity in an attempt to sound friendly",
+      "Overuse exclamation marks"
     ]
   },
   "super_casual": {
     "description": "Friendly and conversational. Contractions OK. Still professional.",
     "do": [
-      "Sound approachable",
-      "Use natural contractions when appropriate"
+      "Follow polished tone as a baseline",
+      "Sound approachable and human",
+      "Use natural contractions (e.g., it's, you're)",
+      "Use light conversational phrasing",
+      "Keep a smooth and relaxed flow",
+      "Show mild warmth or friendliness where appropriate",
+      "Simplify complex ideas without losing clarity"
     ],
     "dont": [
-      "Be sloppy",
-      "Be sarcastic",
-      "Overuse filler phrases"
+      "Be sloppy or unstructured",
+      "Use sarcasm or passive-aggressive tone",
+      "Overuse filler phrases (e.g., 'just', 'like')",
+      "Be overly casual or informal",
+      "Use slang or memes",
+      "Lose clarity in an attempt to sound friendly",
+      "Overuse exclamation marks"
     ]
   },
   "formal": {
     "description": "Professional, precise, courteous. Minimal contractions. Structured.",
     "do": [
-      "Use explicit wording",
-      "Maintain neutral courtesy"
+      "Use clear, explicit, and precise wording",
+      "Maintain a respectful and neutral tone",
+      "Structure responses logically (intro, body, conclusion)",
+      "Use complete sentences with proper grammar",
+      "Be concise but thorough where needed",
+      "Use formal transitions (e.g., 'however', 'therefore')",
+      "Ensure consistency in tone throughout"
     ],
     "dont": [
-      "Use jokes",
-      "Use informal phrases",
-      "Be overly familiar"
+      "Use jokes or humor",
+      "Use contractions excessively",
+      "Use informal or conversational phrases",
+      "Be overly familiar or personal",
+      "Use vague or ambiguous wording",
+      "Include unnecessary embellishments",
+      "Sound emotional or opinionated"
     ]
   },
   "professional": {
     "description": "Professional, precise, courteous. Minimal contractions. Structured.",
     "do": [
-      "Use explicit wording",
-      "Maintain neutral courtesy"
+      "Use clear, explicit, and precise wording",
+      "Maintain a respectful and neutral tone",
+      "Structure responses logically (intro, body, conclusion)",
+      "Use complete sentences with proper grammar",
+      "Be concise but thorough where needed",
+      "Use formal transitions (e.g., 'however', 'therefore')",
+      "Ensure consistency in tone throughout"
     ],
     "dont": [
-      "Use jokes",
-      "Use informal phrases",
-      "Be overly familiar"
+      "Use jokes or humor",
+      "Use contractions excessively",
+      "Use informal or conversational phrases",
+      "Be overly familiar or personal",
+      "Use vague or ambiguous wording",
+      "Include unnecessary embellishments",
+      "Sound emotional or opinionated"
     ]
   }
 }
